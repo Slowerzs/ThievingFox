@@ -1,0 +1,19 @@
+[package]
+name = "keepassxcfox"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+[build-dependencies]
+cc = "1.0"
+static_vcruntime = "2.0"
+
+[dependencies]
+windows = { version = "0.52.0", features = ["Win32_Foundation", "Win32_Security", "Win32_Security_Credentials", "Win32_Graphics_Gdi", "Win32_System_Threading", "Win32_System", "Win32_System_SystemServices", "Win32_UI_WindowsAndMessaging", "Win32_UI", "Win32_System_Console", "Win32_System_Com", "Win32_System_Ole", "Win32_System_Variant", "Win32_System_Diagnostics_Debug", "Win32_System_LibraryLoader"] }
+crypto_common = { path = "../crypto_common" }
+windows-sys = { version = "0.52.0", features = ["Win32_Graphics_Gdi", "Win32_Foundation", "Win32_Security_Credentials", "Win32_Security", "Win32_System_Com", "Win32_System", "Win32_Storage_FileSystem"] }
+minhook-sys = "0.1.1"

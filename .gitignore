@@ -1,0 +1,7 @@
+/client/__pycache__
+/client/cache
+/client/output
+/client/venv
+/client/venv-win
+/public.key
+/private.key
