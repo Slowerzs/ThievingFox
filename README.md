@@ -1,7 +1,7 @@
 # ThievingFox
 
 ThievingFox is a collection of post-exploitation tools to gather credentials from various password managers and windows utilities.
-Each module leverages a specific method of injecting into the target process, and then hook internals functions to gather crendentials. 
+Each module leverages a specific method of injecting into the target process, and then hooks internals functions to gather crendentials. 
 
 The accompanying blog post can be found [here](https://blog.slowerzs.net/posts/thievingfox)
 
