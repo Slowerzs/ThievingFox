@@ -42,6 +42,8 @@ Finally, python dependancies must be installed :
 pip install -r client/requirements.txt
 ```
 
+ThievingFox works with `python >= 3.11`.
+
 ## Windows
 
 Rustup must be installed, follow the instructions available here : https://rustup.rs/
@@ -59,6 +61,8 @@ Finally, python dependancies must be installed :
 ```
 pip install -r client/requirements.txt
 ```
+
+ThievingFox works with `python >= 3.11`
 
 > NOTE : On a Windows host, in order to use the KeePass module, msbuild must be available in the PATH. This can be achieved by running the client from within a Visual Studio Developper Powershell (Tools > Command Line > Developper Powershell)
 
