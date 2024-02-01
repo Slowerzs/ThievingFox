@@ -86,11 +86,11 @@ All modules have been tested on the following Windows versions :
 | ---- | ---- |
 | KeePass.exe | AppDomainManager Injection |
 | KeePassXC.exe | DLL Proxying |
-| LogonUI.exe | COM Hijacking |
-| consent.exe | COM Hijacking |
-| mstsc.exe | COM Hijacking |
-| RDCMan.exe | COM Hijacking |
-| MobaXTerm.exe | COM Hijacking |
+| LogonUI.exe (Windows Login Screen) | COM Hijacking |
+| consent.exe (Windows UAC Popup) | COM Hijacking |
+| mstsc.exe (Windows default RDP client) | COM Hijacking |
+| RDCMan.exe (Sysinternals' RDP client) | COM Hijacking |
+| MobaXTerm.exe (3rd party RDP client) | COM Hijacking |
 
 # Usage
 
