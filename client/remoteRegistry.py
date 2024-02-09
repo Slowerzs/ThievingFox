@@ -183,7 +183,7 @@ class RemoteRegistry:
             self.remoteRegistryConnection,
             targetKeyHandle,
             valueName,
-            rrp.REG_SZ,
+            type,
             data + "\x00",
         )
 
