@@ -424,7 +424,13 @@ fn hook_botan() {
         }
     }
 
-    let botan_handle = unsafe { GetModuleHandleA(PCSTR("botan.dll\0".as_ptr())) };
+    let mut botan_handle = unsafe { GetModuleHandleA(PCSTR("botan.dll\0".as_ptr())) };
+
+    if botan_handle.is_err() {
+        botan_handle = unsafe { GetModuleHandleA(PCSTR("botan-3.dll\0".as_ptr())) };
+    }
+
+
     if botan_handle.is_ok() {
         let botan_handle = botan_handle.unwrap();
 
